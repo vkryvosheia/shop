@@ -1,0 +1,63 @@
+[project]
+name = "shop-backend"
+version = "0.1.0"
+description = "Backend API for the Shop learning project"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "alembic>=1.20.0",
+    "fastapi>=0.143.2",
+    "pydantic-settings>=2.16.0",
+    "pymysql[rsa]>=1.2.3",
+    "sqlalchemy>=2.1.4",
+    "uvicorn[standard]>=0.54.0",
+]
+
+[tool.uv]
+package = false
+
+[dependency-groups]
+dev = [
+    "httpx2>=2.13.1",
+    "pytest>=9.1.1",
+    "ruff>=0.17.0",
+]
+
+
+[tool.alembic]
+script_location = "%(here)s/migrations"
+# e.g. migrations/versions/20261015_1a2b3c4d5e6f_add_products_table.py
+file_template = "%%(year)d%%(month).2d%%(day).2d_%%(rev)s_%%(slug)s"
+prepend_sys_path = ["."]
+
+# Tidy newly generated migration files with ruff (sort imports, then format).
+[[tool.alembic.post_write_hooks]]
+name = "ruff_imports"
+type = "module"
+module = "ruff"
+options = "check --select I --fix --quiet REVISION_SCRIPT_FILENAME"
+
+[[tool.alembic.post_write_hooks]]
+name = "ruff_format"
+type = "module"
+module = "ruff"
+options = "format --quiet REVISION_SCRIPT_FILENAME"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort (import order)
+    "B",   # flake8-bugbear (likely bugs)
+    "UP",  # pyupgrade (modern syntax)
+    "SIM", # flake8-simplify
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = ["-ra", "--strict-markers"]
