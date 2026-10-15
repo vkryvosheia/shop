@@ -72,6 +72,8 @@ uv run uvicorn app.main:create_app --factory --reload
 
 The API runs at http://127.0.0.1:8000, and the interactive API docs are at http://127.0.0.1:8000/docs. There are no endpoints yet, so the docs page is empty. `--reload` restarts the server whenever you save a file. Stop it with `Ctrl+C`.
 
+**Shortcut for every day after that:** `backend/scripts/dev.sh` (from the repo root) does steps 2 and 3 in one go. It starts the database, creates `.env` if it's missing, applies migrations and starts the server. Extra options go to uvicorn, e.g. `backend/scripts/dev.sh --port 8001`.
+
 ### 4. Run the frontend
 
 In a **second** terminal, from the repo root:
