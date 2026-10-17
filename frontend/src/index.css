@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+@theme {
+  /* Шрифти */
+  --font-sans: 'Manrope', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  /* Кольори */
+  --color-ink: #16181D;
+  --color-muted: #565C68;
+  --color-border: #DDE0E6;
+  --color-ground: #F4F5F7;
+  --color-surface: #FFFFFF;
+  --color-primary: #2347C8;
+  --color-primary-hover: #1A3699;
+  --color-primary-tint: #E9EEFC;
+  --color-accent: #F2B33D;
+  --color-success: #1C7444;
+  --color-success-tint: #E2F3E9;
+  --color-warning: #8A5A00;
+  --color-warning-tint: #FFF2D4;
+  --color-danger: #B42318;
+  --color-danger-tint: #FDE7E5;
+
+  /* Додаткові кольори для дошок */
+  --color-focus-ring: #9DB0F0;
+  --color-chip-border: #C9D3F5;
+  --color-switch-off: #B7BCC7;
+  --color-skeleton: #E4E6EB;
+  --color-disabled: #8A909C;
+  --color-upload-border: #C4C8D0;
+
+  /* Оформлення тексту */
+  --text-display: 2.5rem 3rem 800 -0.02em;
+  --text-h1: 2rem 2.5rem 700 -0.01em;
+  --text-h2: 1.5rem 2rem 700;
+  --text-h3: 1.125rem 1.625rem 700;
+  --text-body: 1rem 1.5rem 400;
+  --text-small: 0.875rem 1.25rem 500;
+  --text-label: 0.75rem 1rem 700 0.08em;
+  --text-price: 1.125rem 1.5;
+  --text-mono: 0.875rem 1.4;
+  --text-button: 0.9375rem 1.4;
+  --text-badge: 0.8125rem 1.4;
+
+  /* Radiuses, shadow and 
+content width */
+  --radius-control: 0.375rem;
+  --radius-card: 0.75rem;
+  --shadow-raised: 0 8px 24px rgb(15 23 42 / 0.12);
+  --container-content: 80rem;
+}
+
+@theme {
+  --text-price--font-weight: 800;
+  --text-mono--font-weight: 500;
+  --text-button--font-weight: 700;
+  --text-badge--font-weight: 700;
+}
+
+@layer base {
+  html, body {
+    overflow-x: hidden;
+  }
+
+  body {
+    background-color: var(--color-ground);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  a {
+    color: inherit;
+    transition: color 0.15s ease-in-out;
+  }
+
+  a:hover {
+    color: var(--color-primary);
+  }
+}
