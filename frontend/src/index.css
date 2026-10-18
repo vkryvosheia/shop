@@ -3,7 +3,7 @@
 @theme {
   --color-*: initial;
 
-  /* Шрифти */
+  /* Fonts */
   --font-sans:
     'Manrope', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
     sans-serif;
@@ -11,7 +11,7 @@
     'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     monospace;
 
-  /* Кольори */
+  /* Colors */
   --color-ink: #16181d;
   --color-muted: #565c68;
   --color-border: #dde0e6;
@@ -28,7 +28,7 @@
   --color-danger: #b42318;
   --color-danger-tint: #fde7e5;
 
-  /* Додаткові кольори для дошок */
+  /* Additional board colors */
   --color-focus-ring: #9db0f0;
   --color-chip-border: #c9d3f5;
   --color-switch-off: #b7bcc7;
