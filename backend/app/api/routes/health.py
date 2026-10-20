@@ -1,6 +1,6 @@
 import logging
-
 import sqlalchemy
+from typing import Literal
 from fastapi import APIRouter, Response, status
 from pydantic import BaseModel
 from sqlalchemy.exc import SQLAlchemyError
@@ -13,11 +13,20 @@ router = APIRouter(prefix="/health", tags=["health"])
 
 
 class HealthResponse(BaseModel):
-    status: str
-    database: str
+    status: Literal["ok", "error"]
+    database: Literal["ok", "unavailable"]
 
 
-@router.get("", response_model=HealthResponse)
+@router.get(
+    "",
+    response_model=HealthResponse,
+    responses={
+        status.HTTP_503_SERVICE_UNAVAILABLE: {
+            "model": HealthResponse,
+            "description": "The database is unreachable",
+        }
+    },
+)
 def health_check(db: DbSession, response: Response):
     try:
         db.execute(sqlalchemy.text("SELECT 1"))
