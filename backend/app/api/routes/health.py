@@ -1,6 +1,7 @@
 import logging
-import sqlalchemy
 from typing import Literal
+
+import sqlalchemy
 from fastapi import APIRouter, Response, status
 from pydantic import BaseModel
 from sqlalchemy.exc import SQLAlchemyError

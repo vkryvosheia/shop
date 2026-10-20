@@ -1,5 +1,6 @@
 from fastapi.testclient import TestClient
 from sqlalchemy.exc import SQLAlchemyError
+
 from app.api.deps import get_db
 
 
