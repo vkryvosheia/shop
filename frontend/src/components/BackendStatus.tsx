@@ -2,10 +2,6 @@ import { useEffect, useState } from 'react';
 import { getHealth } from '../api/health';
 
 export function BackendStatus() {
-  if (!import.meta.env.DEV) {
-    return null;
-  }
-
   const [status, setStatus] = useState<'checking' | 'ok' | 'unavailable'>('checking');
 
   useEffect(() => {
@@ -30,6 +26,10 @@ export function BackendStatus() {
     };
   }, []);
 
+  if (!import.meta.env.DEV) {
+    return null;
+  }
+
   if (status === 'checking') {
     return (
       <div role="status" className="text-body text-muted my-2">
@@ -52,8 +52,8 @@ export function BackendStatus() {
         marginTop: '0.5rem',
         marginBottom: '0.5rem',
         backgroundColor: isOk ? '#d1fae5' : '#fee2e2',
+        border: `1px solid ${isOk ? '#a7f3d0' : '#fca5a5'}`,
         color: isOk ? '#065f46' : '#991b1b',
-        border: `1px solid ${isOk ? '#a7f3d0' : '#fca5a5'}`
       }}
     >
       Backend: {isOk ? 'OK' : 'unavailable'}
