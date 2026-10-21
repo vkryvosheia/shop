@@ -1,44 +1,46 @@
-import { useEffect, useState } from 'react';
-import { getHealth } from '../api/health';
+import { useEffect, useState } from 'react'
+import { getHealth } from '../api/health'
 
 export function BackendStatus() {
-  const [status, setStatus] = useState<'checking' | 'ok' | 'unavailable'>('checking');
+  const [status, setStatus] = useState<'checking' | 'ok' | 'unavailable'>(
+    'checking',
+  )
 
   useEffect(() => {
-    const controller = new AbortController();
+    const controller = new AbortController()
 
     getHealth(controller.signal)
       .then((data) => {
         if (data.status === 'ok' && data.database === 'ok') {
-          setStatus('ok');
+          setStatus('ok')
         } else {
-          setStatus('unavailable');
+          setStatus('unavailable')
         }
       })
       .catch((err) => {
         if (err.name !== 'AbortError') {
-          setStatus('unavailable');
+          setStatus('unavailable')
         }
-      });
+      })
 
     return () => {
-      controller.abort();
-    };
-  }, []);
+      controller.abort()
+    }
+  }, [])
 
   if (!import.meta.env.DEV) {
-    return null;
+    return null
   }
 
   if (status === 'checking') {
     return (
-      <div role="status" className="text-body text-muted my-2">
+      <div role="status" className="my-2 text-body text-muted">
         Checking backend…
       </div>
-    );
+    )
   }
 
-  const isOk = status === 'ok';
+  const isOk = status === 'ok'
 
   return (
     <div
@@ -58,5 +60,5 @@ export function BackendStatus() {
     >
       Backend: {isOk ? 'OK' : 'unavailable'}
     </div>
-  );
+  )
 }

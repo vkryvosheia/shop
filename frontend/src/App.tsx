@@ -1,4 +1,4 @@
-import { BackendStatus } from './components/BackendStatus';
+import { BackendStatus } from './components/BackendStatus'
 function App() {
   return (
     <main className="mx-auto min-h-screen max-w-content p-6">
@@ -10,6 +10,6 @@ function App() {
         </p>
       </div>
     </main>
-  );
+  )
 }
-export default App;
+export default App
