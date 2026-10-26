@@ -15,7 +15,7 @@ describe('apiGet client', () => {
         ok: true,
         status: 200,
         json: async () => mockData,
-      })
+      }),
     )
 
     const result = await apiGet('/api/health')
@@ -29,11 +29,11 @@ describe('apiGet client', () => {
       vi.fn().mockResolvedValue({
         ok: false,
         status: 500,
-      })
+      }),
     )
 
     await expect(apiGet('/api/health')).rejects.toThrow(ApiError)
-    
+
     try {
       await apiGet('/api/health')
     } catch (error) {
