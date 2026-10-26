@@ -1,50 +1,52 @@
-import { useEffect, useState } from 'react';
-import { getHealth } from '../api/health';
+import { useEffect, useState } from 'react'
+import { getHealth } from '../api/health'
 
 export function BackendStatus() {
-  const [status, setStatus] = useState<'checking' | 'ok' | 'unavailable'>('checking');
+  const [status, setStatus] = useState<'checking' | 'ok' | 'unavailable'>(
+    'checking',
+  )
 
   useEffect(() => {
-    const controller = new AbortController();
+    const controller = new AbortController()
 
     getHealth(controller.signal)
       .then((data) => {
         if (data.status === 'ok' && data.database === 'ok') {
-          setStatus('ok');
+          setStatus('ok')
         } else {
-          setStatus('unavailable');
+          setStatus('unavailable')
         }
       })
       .catch((err) => {
         if (err.name !== 'AbortError') {
-          setStatus('unavailable');
+          setStatus('unavailable')
         }
-      });
+      })
 
     return () => {
-      controller.abort();
-    };
-  }, []);
+      controller.abort()
+    }
+  }, [])
 
-  const isOk = status === 'ok';
+  const isOk = status === 'ok'
 
   return (
     <div role="status" className="my-2">
       {status === 'checking' && (
-        <span className="text-sm text-gray-500">Checking backend…</span>
+        <span className="text-gray-500 text-sm">Checking backend…</span>
       )}
 
       {status !== 'checking' && (
         <span
-          className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+          className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
             isOk
-              ? 'bg-emerald-100 text-emerald-800 border border-emerald-300'
-              : 'bg-red-100 text-red-800 border border-red-300'
+              ? 'bg-emerald-100 text-emerald-800 border-emerald-300 border'
+              : 'bg-red-100 text-red-800 border-red-300 border'
           }`}
         >
           Backend: {isOk ? 'OK' : 'unavailable'}
         </span>
       )}
     </div>
-  );
+  )
 }
