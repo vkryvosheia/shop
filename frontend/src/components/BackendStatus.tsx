@@ -30,23 +30,23 @@ export function BackendStatus() {
 
   const isOk = status === 'ok'
 
-  return (
-    <div role="status" className="my-2">
-      {status === 'checking' && (
-        <span className="text-gray-500 text-sm">Checking backend…</span>
-      )}
+ return (
+  <div role="status" className="my-2">
+    {status === 'checking' && (
+      <span className="text-muted text-small">Checking backend...</span>
+    )}
 
-      {status !== 'checking' && (
-        <span
-          className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
-            isOk
-              ? 'bg-emerald-100 text-emerald-800 border-emerald-300 border'
-              : 'bg-red-100 text-red-800 border-red-300 border'
-          }`}
-        >
-          Backend: {isOk ? 'OK' : 'unavailable'}
-        </span>
-      )}
-    </div>
-  )
+    {status !== 'checking' && (
+      <span
+        className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-badge border ${
+          isOk
+            ? 'bg-success-tint text-success border-border'
+            : 'bg-danger-tint text-danger border-border'
+        }`}
+      >
+        Backend: {isOk ? 'OK' : 'unavailable'}
+      </span>
+    )}
+  </div>
+)
 }
