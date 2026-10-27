@@ -38,10 +38,8 @@ export function BackendStatus() {
 
       {status !== 'checking' && (
         <span
-          className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-badge ${
-            isOk
-              ? 'border-border bg-success-tint text-success'
-              : 'border-border bg-danger-tint text-danger'
+          className={`inline-flex items-center rounded-[var(--radius-control)] px-2.5 py-0.5 text-badge ${
+            isOk ? 'bg-success-tint text-success' : 'bg-danger-tint text-danger'
           }`}
         >
           Backend: {isOk ? 'OK' : 'unavailable'}
