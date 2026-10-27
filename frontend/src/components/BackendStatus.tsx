@@ -38,7 +38,7 @@ export function BackendStatus() {
 
       {status !== 'checking' && (
         <span
-          className={`inline-flex items-center rounded-[var(--radius-control)] px-2.5 py-0.5 text-badge ${
+          className={`inline-flex items-center rounded-control px-2.5 py-0.5 text-badge ${
             isOk ? 'bg-success-tint text-success' : 'bg-danger-tint text-danger'
           }`}
         >
