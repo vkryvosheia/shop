@@ -1,46 +1,45 @@
-import { describe, it, expect, vi } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { describe, it, expect, afterEach } from 'vitest'
+import { render, screen, cleanup } from '@testing-library/react'
 import { StoreLayout } from './StoreLayout'
 
-vi.mock('../api/health', () => ({
-  getHealth: vi.fn().mockResolvedValue({ status: 'ok', database: 'ok' }),
-}))
+afterEach(() => {
+  cleanup()
+})
 
 describe('StoreLayout Component', () => {
-  it('renders header, main, and footer elements', () => {
-    const { container } = render(
+  it('renders header, main, and footer landmarks', () => {
+    render(
       <StoreLayout>
         <p>Test Content</p>
-      </StoreLayout>,
+      </StoreLayout>
     )
 
-    expect(container.querySelector('header')).toBeInTheDocument()
-    expect(container.querySelector('main')).toBeInTheDocument()
-    expect(container.querySelector('footer')).toBeInTheDocument()
+    expect(screen.getByRole('banner')).toBeInTheDocument()
+    expect(screen.getByRole('main')).toBeInTheDocument()
+    expect(screen.getByRole('contentinfo')).toBeInTheDocument()
     expect(screen.getByText('Test Content')).toBeInTheDocument()
   })
 
-  it('renders the "Shop" logo link with href="/"', () => {
-    const { container } = render(
+  it('renders the "Shop" logo link with href="/" using getByRole', () => {
+    render(
       <StoreLayout>
-        <p>Content</p>
-      </StoreLayout>,
+        <p>Test Content</p>
+      </StoreLayout>
     )
 
-    const logoLink = container.querySelector('header a')
+    const logoLink = screen.getByRole('link', { name: 'Shop' })
     expect(logoLink).toBeInTheDocument()
     expect(logoLink).toHaveAttribute('href', '/')
-    expect(logoLink).toHaveTextContent(/shop/i)
   })
 
   it('displays the current year and prices in uah in the footer', () => {
-    const { container } = render(
+    render(
       <StoreLayout>
-        <p>Content</p>
-      </StoreLayout>,
+        <p>Test Content</p>
+      </StoreLayout>
     )
 
-    const footer = container.querySelector('footer')
+    const footer = screen.getByRole('contentinfo')
     const currentYear = new Date().getFullYear().toString()
 
     expect(footer).toHaveTextContent(currentYear)
