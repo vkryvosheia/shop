@@ -11,7 +11,7 @@ describe('StoreLayout Component', () => {
     render(
       <StoreLayout>
         <p>Test Content</p>
-      </StoreLayout>
+      </StoreLayout>,
     )
 
     expect(screen.getByRole('banner')).toBeInTheDocument()
@@ -24,7 +24,7 @@ describe('StoreLayout Component', () => {
     render(
       <StoreLayout>
         <p>Test Content</p>
-      </StoreLayout>
+      </StoreLayout>,
     )
 
     const logoLink = screen.getByRole('link', { name: 'Shop' })
@@ -36,7 +36,7 @@ describe('StoreLayout Component', () => {
     render(
       <StoreLayout>
         <p>Test Content</p>
-      </StoreLayout>
+      </StoreLayout>,
     )
 
     const footer = screen.getByRole('contentinfo')

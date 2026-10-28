@@ -7,9 +7,12 @@ interface StoreLayoutProps {
 
 export function StoreLayout({ children }: StoreLayoutProps) {
   return (
-    <div className="min-h-screen bg-ground flex flex-col text-body text-main">
-      <header className="border-b border-border bg-surface px-6 py-4 flex items-center justify-between">
-        <a href="/" className="text-2xl font-extrabold tracking-tight text-main">
+    <div className="text-main flex min-h-screen flex-col bg-ground text-body">
+      <header className="flex items-center justify-between border-b border-border bg-surface px-6 py-4">
+        <a
+          href="/"
+          className="text-main text-2xl font-extrabold tracking-tight"
+        >
           Shop
         </a>
       </header>
@@ -18,7 +21,7 @@ export function StoreLayout({ children }: StoreLayoutProps) {
         {children}
       </main>
 
-      <footer className="border-t border-border bg-surface px-6 py-6 text-muted text-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+      <footer className="flex flex-col items-start justify-between gap-4 border-t border-border bg-surface px-6 py-6 text-sm text-muted sm:flex-row sm:items-center">
         <div>
           <p>© {new Date().getFullYear()} Shop. Prices in UAH.</p>
         </div>
