@@ -23,11 +23,13 @@ export function StoreLayout({ children }: StoreLayoutProps) {
         {children}
       </main>
 
-      <footer className="flex flex-col items-start justify-between gap-4 border-t border-border bg-surface px-6 py-6 text-sm sm:flex-row sm:items-center">
-        <div>
-          <p>© {new Date().getFullYear()} Shop. Prices in UAH.</p>
+      <footer className="border-t border-border bg-surface py-6 text-sm">
+        <div className="mx-auto flex w-full max-w-content flex-col items-start justify-between gap-4 px-6 sm:flex-row sm:items-center">
+          <div>
+            <p>© {new Date().getFullYear()} Shop. Prices in UAH.</p>
+          </div>
+          {import.meta.env.DEV && <BackendStatus />}
         </div>
-        {import.meta.env.DEV && <BackendStatus />}
       </footer>
     </div>
   )
