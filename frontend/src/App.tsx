@@ -1,16 +1,27 @@
+import { createBrowserRouter, RouterProvider } from 'react-router'
 import { StoreLayout } from './components/StoreLayout'
+import { HomePage } from './pages/HomePage'
+import { NotFoundPage } from './pages/NotFoundPage'
 
-function App() {
-  return (
-    <StoreLayout>
-      <div className="space-y-4 rounded-card bg-surface p-6 shadow-raised">
-        <h1 className="text-2xl font-bold">Shop</h1>
-        <p className="text-body text-muted">
-          Тестова сторінка перевірки стилів Tailwind CSS v4.
-        </p>
-      </div>
-    </StoreLayout>
-  )
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <StoreLayout />,
+    children: [
+      {
+        index: true,
+        element: <HomePage />,
+      },
+      {
+        path: '*',
+        element: <NotFoundPage />,
+      },
+    ],
+  },
+])
+
+export function App() {
+  return <RouterProvider router={router} />
 }
 
 export default App
