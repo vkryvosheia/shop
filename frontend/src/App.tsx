@@ -1,15 +1,26 @@
-import { BackendStatus } from './components/BackendStatus'
-function App() {
-  return (
-    <main className="mx-auto min-h-screen max-w-content p-6">
-      <div className="rounded-card bg-surface p-6 shadow-raised">
-        <h1>Shop</h1>
-        {import.meta.env.DEV && <BackendStatus />}
-        <p className="text-body text-muted">
-          Тестова сторінка перевірки стилів Tailwind CSS v4.
-        </p>
-      </div>
-    </main>
-  )
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { StoreLayout } from './components/StoreLayout'
+import { NotFound } from './pages/NotFound'
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <StoreLayout />,
+    children: [
+      {
+        index: true,
+        element: <div>Store Catalog Page</div>,
+      },
+      {
+        path: '*',
+        element: <NotFound />,
+      },
+    ],
+  },
+])
+
+export function App() {
+  return <RouterProvider router={router} />
 }
+
 export default App

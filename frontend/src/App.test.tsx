@@ -1,15 +1,10 @@
 import { render, screen } from '@testing-library/react'
-import { describe, expect, it, vi } from 'vitest'
-import App from './App.tsx'
-
-vi.mock('./api/health', () => ({
-  getHealth: vi.fn().mockResolvedValue({ status: 'ok', database: 'ok' }),
-}))
+import App from './App'
+import { describe, it, expect } from 'vitest'
 
 describe('App', () => {
-  it('renders the shop heading', () => {
+  it('renders store catalog page on default route', () => {
     render(<App />)
-
-    expect(screen.getByRole('heading', { name: 'Shop' })).toBeInTheDocument()
+    expect(screen.getByText(/store catalog page/i)).toBeInTheDocument()
   })
 })
