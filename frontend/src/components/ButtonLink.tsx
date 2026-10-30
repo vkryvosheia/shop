@@ -1,6 +1,5 @@
 import type { ReactNode } from 'react'
 import { Link, type LinkProps } from 'react-router-dom'
-import { Button } from './Button'
 
 interface ButtonLinkProps extends LinkProps {
   children: ReactNode
