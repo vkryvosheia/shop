@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { StoreLayout } from './components/StoreLayout'
-import { NotFound } from './pages/NotFound'
+import { HomePage } from './pages/HomePage'
+import { NotFoundPage } from './pages/NotFoundPage'
 
 const router = createBrowserRouter([
   {
@@ -9,11 +10,11 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <div>Store Catalog Page</div>,
+        element: <HomePage />,
       },
       {
         path: '*',
-        element: <NotFound />,
+        element: <NotFoundPage />,
       },
     ],
   },

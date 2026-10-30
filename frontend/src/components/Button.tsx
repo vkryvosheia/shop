@@ -1,52 +1,30 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react'
-import { Link, type LinkProps } from 'react-router-dom'
 
-type ButtonVariant = 'primary' | 'secondary'
-
-interface ButtonBaseProps {
-  variant?: ButtonVariant
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode
-  className?: string
-}
-
-export type ButtonProps = ButtonBaseProps &
-  ButtonHTMLAttributes<HTMLButtonElement>
-export type ButtonLinkProps = ButtonBaseProps & LinkProps
-
-const baseStyles =
-  'inline-flex items-center justify-center h-11 px-6 rounded-control text-button font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 no-underline'
-
-const variantStyles: Record<ButtonVariant, string> = {
-  primary: 'bg-primary text-surface hover:bg-primary-hover shadow-sm',
-  secondary:
-    'bg-surface text-ink border border-border hover:bg-ground shadow-sm',
+  variant?: 'primary' | 'secondary'
 }
 
 export function Button({
-  variant = 'primary',
   children,
+  variant = 'primary',
   className = '',
-  ...rest
+  ...props
 }: ButtonProps) {
-  const combinedStyles = `${baseStyles} ${variantStyles[variant]} ${className}`
+  const baseStyles =
+    'inline-flex items-center justify-center h-[44px] px-6 rounded-control text-button font-bold transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2'
+
+  const variantStyles =
+    variant === 'primary'
+      ? 'bg-primary text-primary-contrast hover:bg-primary-hover'
+      : 'border border-border bg-surface text-ink hover:bg-ground'
+
   return (
-    <button className={combinedStyles} {...rest}>
+    <button
+      className={`${baseStyles} ${variantStyles} ${className}`}
+      {...props}
+    >
       {children}
     </button>
-  )
-}
-
-export function ButtonLink({
-  variant = 'primary',
-  children,
-  className = '',
-  to,
-  ...rest
-}: ButtonLinkProps) {
-  const combinedStyles = `${baseStyles} ${variantStyles[variant]} ${className}`
-  return (
-    <Link to={to} className={combinedStyles} {...rest}>
-      {children}
-    </Link>
   )
 }
