@@ -1,4 +1,5 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react'
+import { buttonBaseStyles, buttonVariantStyles } from './buttonStyles'
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode
@@ -11,17 +12,11 @@ export function Button({
   className = '',
   ...props
 }: ButtonProps) {
-  const baseStyles =
-    'inline-flex items-center justify-center h-[44px] px-6 rounded-control text-button font-bold transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2'
-
-  const variantStyles =
-    variant === 'primary'
-      ? 'bg-primary text-primary-contrast hover:bg-primary-hover'
-      : 'border border-border bg-surface text-ink hover:bg-ground'
+  const variantStyles = buttonVariantStyles[variant]
 
   return (
     <button
-      className={`${baseStyles} ${variantStyles} ${className}`}
+      className={`${buttonBaseStyles} ${variantStyles} ${className}`}
       {...props}
     >
       {children}

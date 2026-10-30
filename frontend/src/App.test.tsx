@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react'
-import { createMemoryRouter, RouterProvider } from 'react-router-dom'
+import { createMemoryRouter, RouterProvider } from 'react-router'
 import { describe, it, expect } from 'vitest'
 import { StoreLayout } from './components/StoreLayout'
 import { HomePage } from './pages/HomePage'
