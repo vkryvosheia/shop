@@ -89,6 +89,15 @@
 }
 
 @layer base {
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: 3px solid var(--color-focus-ring, #2563eb);
+    outline-offset: 2px;
+  }
+
   body {
     background-color: var(--color-ground);
     color: var(--color-ink);
