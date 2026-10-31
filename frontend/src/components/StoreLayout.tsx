@@ -20,11 +20,10 @@ export function StoreLayout() {
       <main
         id="main-content"
         tabIndex={-1}
-        className="flex-1 px-6 py-8 outline-none"
+        className="mx-auto flex w-full max-w-content flex-1 flex-col px-6 py-8 outline-none"
       >
         <Outlet />
       </main>
-
       <footer className="border-t border-border bg-surface py-4">
         <div className="mx-auto flex w-full max-w-content flex-col items-center justify-between gap-2 px-6 sm:flex-row">
           <p className="text-sm text-muted">
