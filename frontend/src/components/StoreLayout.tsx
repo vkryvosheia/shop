@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router'
+import { Outlet, Link } from 'react-router'
 import { SkipLink } from './SkipLink'
 import { BackendStatus } from './BackendStatus'
 
@@ -11,9 +11,12 @@ export function StoreLayout() {
 
       <header className="border-b border-border bg-surface py-4">
         <div className="mx-auto flex w-full max-w-content items-center justify-between px-6">
-          <a href="/" className="text-xl font-bold text-ink">
+          <Link
+            to="/"
+            className="text-2xl font-extrabold tracking-tight !text-ink no-underline hover:opacity-90"
+          >
             Shop
-          </a>
+          </Link>
         </div>
       </header>
 
