@@ -4,6 +4,18 @@ import { StoreLayout } from './StoreLayout'
 import { describe, it, expect } from 'vitest'
 
 describe('StoreLayout Component', () => {
+  it('has a skip to main content link as the first focusable element', () => {
+    render(
+      <MemoryRouter>
+        <StoreLayout />
+      </MemoryRouter>,
+    )
+
+    const skipLink = screen.getByRole('link', { name: /skip to main content/i })
+    expect(skipLink).toBeInTheDocument()
+    expect(skipLink).toHaveAttribute('href', '#main-content')
+  })
+
   it('renders header, main, and footer landmarks', () => {
     render(
       <MemoryRouter>
