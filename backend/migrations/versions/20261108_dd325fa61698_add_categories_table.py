@@ -26,7 +26,7 @@ def upgrade() -> None:
         sa.Column("slug", sa.String(length=120), nullable=False),
         sa.Column("image_path", sa.String(length=255), nullable=True),
         sa.Column("position", sa.Integer(), nullable=False),
-        sa.Column('is_visible', sa.Boolean(), server_default=sa.false(), nullable=False),
+        sa.Column("is_visible", sa.Boolean(), server_default=sa.false(), nullable=False),
         sa.Column("created_at", sa.DateTime(), server_default=sa.text("now()"), nullable=False),
         sa.Column("updated_at", sa.DateTime(), server_default=sa.text("now()"), nullable=False),
         sa.PrimaryKeyConstraint("id", name=op.f("pk_categories")),
