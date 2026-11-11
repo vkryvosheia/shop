@@ -56,8 +56,9 @@ def test_duplicate_sku_raises_error(db_session):
     db_session.commit()
 
     db_session.add(p2)
-    with pytest.raises(IntegrityError):
+    with pytest.raises(IntegrityError, match="uq_products_sku"):
         db_session.commit()
+    db_session.rollback()
 
 
 def test_delete_category_with_products_fails(db_session):
@@ -77,9 +78,9 @@ def test_delete_category_with_products_fails(db_session):
     db_session.commit()
 
     db_session.delete(category)
-    with pytest.raises(IntegrityError):
+    with pytest.raises(IntegrityError, match="fk_products_category_id_categories"):
         db_session.commit()
-
+    db_session.rollback()
 
 def test_negative_stock_rejected(db_session):
     category = Category(name="Sports", slug="sports", position=4)
@@ -96,5 +97,6 @@ def test_negative_stock_rejected(db_session):
         sku="BALL-1",
     )
     db_session.add(product)
-    with pytest.raises((IntegrityError, OperationalError)):
+    with pytest.raises((IntegrityError, OperationalError), match="stock_non_negative"):
         db_session.commit()
+    db_session.rollback()
