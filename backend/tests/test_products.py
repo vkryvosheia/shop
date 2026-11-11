@@ -82,6 +82,7 @@ def test_delete_category_with_products_fails(db_session):
         db_session.commit()
     db_session.rollback()
 
+
 def test_negative_stock_rejected(db_session):
     category = Category(name="Sports", slug="sports", position=4)
     db_session.add(category)
