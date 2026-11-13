@@ -18,6 +18,7 @@ from sqlalchemy import (
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base import Base
+from app.models.product_photo import ProductPhoto
 
 if TYPE_CHECKING:
     from app.models.category import Category
@@ -37,8 +38,10 @@ class Product(Base):
     short_description: Mapped[str] = mapped_column(String(200), nullable=False)
     description: Mapped[str | None] = mapped_column(Text, nullable=True)
     category_id: Mapped[int] = mapped_column(
-        ForeignKey("categories.id", ondelete="RESTRICT"), nullable=False, index=True
+        Integer, ForeignKey("categories.id", ondelete="RESTRICT"), nullable=False, index=True
     )
+    category: Mapped[Category] = relationship("Category", back_populates="products")
+
     price: Mapped[Decimal] = mapped_column(Numeric(10, 2), nullable=False)
     stock: Mapped[int] = mapped_column(Integer, nullable=False, server_default="0", default=0)
     sku: Mapped[str] = mapped_column(String(50), unique=True, nullable=False)
@@ -52,4 +55,9 @@ class Product(Base):
         DateTime, server_default=text("now()"), onupdate=text("now()"), nullable=False
     )
 
-    category: Mapped[Category] = relationship("Category", back_populates="products")
+    photos: Mapped[list[ProductPhoto]] = relationship(
+        "ProductPhoto",
+        back_populates="product",
+        order_by="ProductPhoto.position",
+        cascade="all, delete-orphan",
+    )
