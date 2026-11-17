@@ -1,4 +1,5 @@
 import argparse
+import sys
 from datetime import UTC, datetime, timedelta
 from decimal import Decimal
 from typing import Any
@@ -11,8 +12,7 @@ from app.core.slugs import make_unique_slug, slugify
 from app.db.session import create_db_engine, create_session_factory
 from app.models.category import Category
 from app.models.product import Product
-
-# from app.models.photo import Photo
+from app.models.product_photo import ProductPhoto
 
 CATEGORIES_DATA = [
     {"name": "Кераміка", "is_visible": True, "sku_prefix": "CER"},
@@ -209,8 +209,8 @@ RAW_PRODUCTS_DATA: list[dict[str, Any]] = [
         "name": "Набір кухонних рушників (3 шт.)",
         "price": Decimal("360.00"),
         "stock": 20,
-        "days_ago": 65,
         "is_visible": True,
+        "days_ago": 65,
         "short": "Вафельні рушники з 100% бавовни.",
         "full": "Чудово вбирають вологу та швидко сохнуть.",
     },
@@ -504,10 +504,10 @@ def seed_data(session: Session, reset: bool = False) -> dict[str, int]:
             "Categories already exist. Execution stopped. "
             "Use --reset to delete all photos, products, and categories first."
         )
-        return {"categories": 0, "products": 0}
+        sys.exit(1)
 
     if reset:
-        # session.execute(delete(Photo))
+        session.execute(delete(ProductPhoto))
         session.execute(delete(Product))
         session.execute(delete(Category))
         session.commit()
@@ -569,12 +569,10 @@ def seed_data(session: Session, reset: bool = False) -> dict[str, int]:
 
     session.commit()
 
-    summary = {
+    return {
         "categories": created_categories_count,
         "products": created_products_count,
     }
-    print(f"Created {created_categories_count} categories and {created_products_count} products.")
-    return summary
 
 
 def main() -> None:
@@ -592,10 +590,7 @@ def main() -> None:
 
     with SessionLocal() as session:
         summary = seed_data(session, reset=args.reset)
-        print(
-            f"Seeding completed: {summary['categories']} categories,"
-            f" {summary['products']} products created."
-        )
+        print(f"Created {summary['categories']} categories and {summary['products']} products.")
 
 
 if __name__ == "__main__":

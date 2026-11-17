@@ -4,7 +4,10 @@ from scripts.seed import seed_data
 
 
 def test_seed_script_creates_correct_data(db_session):
-
+    """
+    Checks that the seed function correctly fills the database,
+    creates exactly 6 categories, hides 'Прикраси', and creates at least 45 products.
+    """
     summary = seed_data(db_session, reset=True)
 
     assert summary["categories"] == 6
