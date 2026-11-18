@@ -5,18 +5,17 @@ way a real team works. Work is tracked on the
 [project board](https://github.com/users/vkryvosheia/projects/1). See
 [CONTRIBUTING.md](CONTRIBUTING.md) for how to pick up a ticket and open a PR.
 
-| Part     | Stack                                                      |
+| Part     | Stack                                                     |
 | -------- | ---------------------------------------------------------- |
 | Backend  | Python 3.12, FastAPI, SQLAlchemy 2, Alembic, MySQL 8, pytest |
 | Frontend | React, TypeScript, Vite, React Router, Vitest              |
 | Tooling  | uv, ruff, ESLint, Prettier, Docker Compose, GitHub Actions |
 
-```
-backend/     FastAPI app (app/), migrations (migrations/), tests (tests/)
-frontend/    React app (src/)
-docker/      Files used by docker-compose.yml
-.github/     CI workflow, issue and PR templates
-```
+backend/    FastAPI app (app/), migrations (migrations/), tests (tests/)
+frontend/   React app (src/)
+docker/     Files used by docker-compose.yml
+.github/    CI workflow, issue and PR templates
+
 
 ## Prerequisites
 
@@ -31,8 +30,6 @@ Check that everything is there:
 
 ```bash
 git --version && docker --version && uv --version && node --version
-```
-
 The commands below are for macOS/Linux. On Windows, use Git Bash (installed with Git) and they work the same.
 
 ## Setup
@@ -73,6 +70,21 @@ uv run uvicorn app.main:create_app --factory --reload
 The API runs at http://127.0.0.1:8000, and the interactive API docs are at http://127.0.0.1:8000/docs. There are no endpoints yet, so the docs page is empty. `--reload` restarts the server whenever you save a file. Stop it with `Ctrl+C`.
 
 **Shortcut for every day after that:** `backend/scripts/dev.sh` (from the repo root) does steps 2 and 3 in one go. It starts the database, creates `.env` if it's missing, applies migrations and starts the server. Extra options go to uvicorn, e.g. `backend/scripts/dev.sh --port 8001`.
+
+## Sample data
+
+To build and demo the store, you can seed the development database with realistic Ukrainian sample data.
+
+Run the following command from the `backend/` directory:
+
+```bash
+uv run python -m scripts.seed
+```
+If the categories already exist, the script will stop to prevent duplicates. To start fresh, run the command with the --reset flag, which deletes all photos, products, and categories first:
+
+```bash
+uv run python -m scripts.seed --reset
+```
 
 ### 4. Run the frontend
 
