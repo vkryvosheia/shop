@@ -36,7 +36,7 @@ def get_public_categories(db: DbSession):
             "id": category.id,
             "name": category.name,
             "slug": category.slug,
-            "image_url": getattr(category, "image_url", None),
+            "image_url": f"/api/media/{category.image_path}" if category.image_path else None,
             "product_count": count,
         }
         for category, count in results
