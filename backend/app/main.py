@@ -24,7 +24,6 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app = FastAPI(title=settings.app_name, lifespan=lifespan)
     app.state.settings = settings
     app.state.session_factory = create_session_factory(engine)
-
     app.include_router(api_router)
 
     return app

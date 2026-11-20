@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from app.api.routes import health
+from app.api.routes import categories, health
 
 # Every API endpoint lives under /api. Feature routers are defined in
 # app/api/routes/ and included here, e.g.:
@@ -8,3 +8,4 @@ from app.api.routes import health
 #     api_router.include_router(products.router)
 api_router = APIRouter(prefix="/api")
 api_router.include_router(health.router)
+api_router.include_router(categories.router)
