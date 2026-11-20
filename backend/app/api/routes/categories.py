@@ -36,7 +36,9 @@ def get_public_categories(db: DbSession):
             "id": category.id,
             "name": category.name,
             "slug": category.slug,
-            "image_url": f"/api/media/{category.image_path}" if category.image_path else None,
+            "image_url": (
+                f"/api/media/{category.image_path.lstrip('/')}" if category.image_path else None
+            ),
             "product_count": count,
         }
         for category, count in results

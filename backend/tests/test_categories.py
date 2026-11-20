@@ -52,6 +52,7 @@ def test_get_public_categories_filtering_ordering_and_product_count(client: Test
         slug="keramika",
         position=1,
         is_visible=True,
+        image_path="categories/keramika.jpg",
     )
     cat_hidden = Category(
         name="Прикраси",
@@ -133,8 +134,10 @@ def test_get_public_categories_filtering_ordering_and_product_count(client: Test
 
     assert data[0]["name"] == "Кераміка"
     assert data[0]["slug"] == "keramika"
+    assert data[0]["image_url"] == "/api/media/categories/keramika.jpg"
     assert data[0]["product_count"] == 2
 
     assert data[1]["name"] == "Текстиль"
     assert data[1]["slug"] == "tekstyl"
+    assert data[1]["image_url"] is None
     assert data[1]["product_count"] == 1
